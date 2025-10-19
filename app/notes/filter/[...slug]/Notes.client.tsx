@@ -4,26 +4,28 @@ import { useState, useEffect } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { Toaster, toast } from 'react-hot-toast';
-import css from './NotesPage.module.css';
+import css from './Notes.module.css';
 import { fetchNotes } from '@/lib/api';
 import NoteList from '@/components/NoteList/NoteList';
 import SearchBox from '@/components/SearchBox/SearchBox';
 import Pagination from '@/components/Pagination/Pagination';
 import Modal from '@/components/Modal/Modal';
 import NoteForm from '@/components/NoteForm/NoteForm';
-import Loading from '../loading';
+import Loading from '../../../loading';
 import Error from './error';
 
-export default function NotesClient() {
+interface NotesClientProps {
+  tag: string;
+}
+
+export default function NotesClient({ tag }: NotesClientProps) {
   const [search, setSearch] = useState<string>('');
   const [page, setPage] = useState<number>(1);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const perPage = 12;
-
   const { data, error, isSuccess, isError, isLoading } = useQuery({
-    queryKey: ['notes', search, page],
-    queryFn: () => fetchNotes(search, page, perPage),
+    queryKey: ['notes', search, page, tag],
+    queryFn: () => fetchNotes(search, page, tag),
     placeholderData: keepPreviousData,
   });
 
@@ -63,7 +65,7 @@ export default function NotesClient() {
       </div>
       {isLoading && <Loading />}
       {isError && (
-        <Error error={error} reset={() => fetchNotes(search, page, perPage)} />
+        <Error error={error} reset={() => fetchNotes(search, page, tag)} />
       )}
       {data?.notes && totalNotes > 0 && <NoteList notes={data?.notes} />}
       {isModalOpen && (

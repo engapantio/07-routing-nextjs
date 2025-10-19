@@ -2,7 +2,6 @@
 
 import axios from 'axios';
 import { Note } from '../types/note';
-
 interface FetchNotesResponse {
   notes: Note[];
   totalPages: number;
@@ -21,13 +20,27 @@ axios.defaults.headers.common['Authorization'] =
 export const fetchNotes = async (
   search: string,
   page: number,
+  tag: string,
   perPage: number = 12
 ): Promise<FetchNotesResponse> => {
-  const s = search ? `search=${search}&` : '';
-  const response = await axios.get<FetchNotesResponse>(
-    `/notes?${s}page=${page}&perPage=${perPage}`
-  );
+  const searchQuery = search ? search : '';
 
+  const params = tag
+    ? {
+        search: searchQuery,
+        tag,
+        page,
+        perPage,
+      }
+    : {
+        search: searchQuery,
+        page,
+        perPage,
+      };
+
+  const response = await axios.get<FetchNotesResponse>('/notes', {
+    params,
+  });
   return response.data;
 };
 

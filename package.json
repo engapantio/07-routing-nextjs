@@ -1,6 +1,6 @@
 {
-  "name": "06-notehub-nextjs",
-  "version": "0.1.0",
+  "name": "07-routing-nextjs",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
