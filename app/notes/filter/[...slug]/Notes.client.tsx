@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { Toaster, toast } from 'react-hot-toast';
-import css from './Notes.module.css';
+import css from './NotesPage.module.css';
 import { fetchNotes } from '@/lib/api';
 import NoteList from '@/components/NoteList/NoteList';
 import SearchBox from '@/components/SearchBox/SearchBox';

@@ -18,7 +18,7 @@ export default function NoteList({ notes }: NoteListProps) {
   const toBeDeletedNote = useMutation({
     mutationFn: (id: Note['id']) => deleteNote(id),
     onSuccess: () => {
-      toast('Note deleted!', { duration: 1500, position: 'bottom-right' });
+      toast('Note deleted!', { duration: 1500, position: 'bottom-center' });
       queryClient.invalidateQueries({ queryKey: ['notes'] });
     },
   });
