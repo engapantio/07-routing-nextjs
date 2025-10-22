@@ -1,7 +1,7 @@
 // app/@modal/(.)notes/[id]/page.tsx
 import css from './NotePreview.module.css';
 import { fetchNoteById } from '@/lib/api';
-import Modal from '@/components/ModalClient/ModalClient';
+import Modal from '@/app/@modal/(.)notes/[id]/NotePreview.client';
 
 type Props = {
   params: Promise<{ id: string }>;

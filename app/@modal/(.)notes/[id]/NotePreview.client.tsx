@@ -1,15 +1,15 @@
 // components/ModalClient/ModalClient.tsx
 'use client';
 
-import css from './Modal.module.css';
+import css from './NotePreview.client.module.css';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-interface ModalProps {
+interface NotePreviewClientProps {
   children: React.ReactNode;
 }
 
-const Modal = ({ children }: ModalProps) => {
+const NotePreviewClient = ({ children }: NotePreviewClientProps) => {
   const router = useRouter();
 
   const close = () => router.back();
@@ -34,4 +34,4 @@ const Modal = ({ children }: ModalProps) => {
   );
 };
 
-export default Modal;
+export default NotePreviewClient;
