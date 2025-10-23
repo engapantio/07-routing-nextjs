@@ -1,7 +1,6 @@
-// components/Header/Header.tsx
+// components/Header/Header.tsx';
 import Link from 'next/link';
 import css from './Header.module.css';
-import TagsMenu from '../TagsMenu/TagsMenu';
 
 const Header = () => {
   return (
@@ -17,7 +16,9 @@ const Header = () => {
             </Link>
           </li>
           <li className={css.navigationItem}>
-            <TagsMenu />
+            <Link href="/notes/filter/all" className={css.navigationLink}>
+              Notes
+            </Link>
           </li>
         </ul>
       </nav>

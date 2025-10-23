@@ -11,7 +11,7 @@ import SearchBox from '@/components/SearchBox/SearchBox';
 import Pagination from '@/components/Pagination/Pagination';
 import Modal from '@/components/Modal/Modal';
 import NoteForm from '@/components/NoteForm/NoteForm';
-import Loading from '../../../loading';
+import Loading from '@/app/loading';
 import Error from './error';
 
 interface NotesClientProps {

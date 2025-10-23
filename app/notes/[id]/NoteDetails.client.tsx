@@ -10,17 +10,14 @@ const NoteDetailsClient = () => {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
 
-  const {
-    data: note,
-    isLoading,
-    error,
-  } = useQuery({
+  const back = () => router.back();
+
+  const { data: note, error } = useQuery({
     queryKey: ['note', id],
     queryFn: () => fetchNoteById(id),
     refetchOnMount: false,
   });
 
-  if (isLoading) return <p>Loading, please wait...</p>;
   if (error) return <Error error={error} />;
   if (!note) return <p>Something went wrong.</p>;
 
@@ -28,16 +25,9 @@ const NoteDetailsClient = () => {
     ? `Updated at: ${note.updatedAt}`
     : `Created at: ${note.createdAt}`;
 
-  const handleGoBack = () => {
-    const isSure = confirm('Are you sure?');
-    if (isSure) {
-      router.back();
-    }
-  };
-
   return (
     <div className={css.container}>
-      <button onClick={handleGoBack} className={css.backBtn}>
+      <button onClick={back} className={css.backBtn}>
         Back
       </button>
       <div className={css.item}>

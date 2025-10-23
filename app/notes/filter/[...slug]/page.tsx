@@ -15,12 +15,12 @@ interface NotesProps {
 const Notes = async ({ params }: NotesProps) => {
   const queryClient = new QueryClient();
   const { slug } = await params;
-  const tag = slug[0] === 'All' ? '' : slug[0];
+  const tag = slug[0] === 'all' ? '' : slug[0];
   const search = '';
   const page = 1;
 
   await queryClient.prefetchQuery({
-    queryKey: ['notes'],
+    queryKey: ['notes', tag],
     queryFn: () => fetchNotes(search, page, tag),
   });
 
