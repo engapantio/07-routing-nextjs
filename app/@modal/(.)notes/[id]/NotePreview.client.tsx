@@ -3,23 +3,15 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { useParams, useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 import css from './NotePreview.module.css';
 import { fetchNoteById } from '@/lib/api';
+import Modal from '@/components/Modal/Modal';
 import Loading from '@/app/loading';
 import Error from './error';
 
 const NotePreviewClient = () => {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
-
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, []);
 
   const close = () => router.back();
 
@@ -42,22 +34,20 @@ const NotePreviewClient = () => {
     : `Created at: ${note.createdAt}`;
 
   return (
-    <div className={css.backdrop}>
-      <div className={css.modal}>
-        <div className={css.container}>
-          <div className={css.item}>
-            <div className={css.header}>
-              <h2>{note.title}</h2>
-            </div>
-            <p className={css.content}>{note.content}</p>
-            <p className={css.date}>{formattedDate}</p>
+    <Modal onClose={close}>
+      <div className={css.container}>
+        <div className={css.item}>
+          <div className={css.header}>
+            <h2>{note.title}</h2>
           </div>
+          <p className={css.content}>{note.content}</p>
+          <p className={css.date}>{formattedDate}</p>
         </div>
-        <button onClick={close} className={css.backBtn}>
-          Back
-        </button>
       </div>
-    </div>
+      <button onClick={close} className={css.backBtn}>
+        Back
+      </button>
+    </Modal>
   );
 };
 
